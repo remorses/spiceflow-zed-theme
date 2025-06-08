@@ -1,14 +1,10 @@
 # Spiceflow Zed Themes
 
-Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vscode-theme). Generated from [Primer's Primitives](https://primer.style/primitives/).
+Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vscode-theme). Generated from [Primer's Primitives](https://primer.style/primitives/) with modifications.
 
 ### Light
 
 ![Light Theme](./art/light.png)
-
-### Light High Contrast
-
-![Light High Contrast Theme](./art/light_contrast.png)
 
 ### Dark
 
@@ -17,10 +13,6 @@ Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vs
 ### Dark Dimmed
 
 ![Dark Dimmed Theme](./art/dark_dimmed.png)
-
-### Dark High Contrast
-
-![Dark High Contrast Theme](./art/dark_contrast.png)
 
 ## Installation
 
