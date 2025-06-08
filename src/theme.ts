@@ -23,7 +23,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
    * Helper function to select token based on theme type
    */
   const lightDark = (lightTokenName: string, darkTokenName: string): string => {
-    return themeKey.startsWith('light') ? (tokens[lightTokenName] || '') : (tokens[darkTokenName] || '');
+    return themeKey.startsWith('light') ? (tokens[lightTokenName] || '') : (tokens[darkTokenName]      || '');
   };
 
   /**

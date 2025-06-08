@@ -2,6 +2,8 @@
 
 Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vscode-theme). Generated from [Primer's Primitives](https://primer.style/primitives/) with modifications.
 
+Git deletions have been colored purple so you can distinguish errors from deletions in the scrollbar gutters.
+
 ### Light
 
 ![Light Theme](./art/light.png)
@@ -36,12 +38,3 @@ Feel free to fork, make changes, and submit a pull request.
 npm install
 npm run dev
 ```
-
-## Publishing new versions
-
-1. Update the version in `extension.toml`
-2. Run `npm run build`
-3. Commit and push your changes (make sure to push the built files in `themes/` as well)
-4. Follow the [Zed publishing docs](https://zed.dev/docs/extensions/developing-extensions#updating-an-extension) to publish the extension
-
-.
