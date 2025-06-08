@@ -1,7 +1,14 @@
 import fs from "node:fs/promises";
 import { getTheme } from "./theme.js";
 
-const writeData = {
+interface WriteData {
+  $schema: string;
+  name: string;
+  author: string;
+  themes: ReturnType<typeof getTheme>[];
+}
+
+const writeData: WriteData = {
   $schema: "https://zed.dev/schema/themes/v0.1.0.json",
   name: "Spiceflow Theme",
   author: "Tommy D. Rossi & Pyae Sone Aung",

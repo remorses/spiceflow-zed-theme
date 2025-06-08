@@ -25,11 +25,9 @@ const themes = {
   'dark_high_contrast': darkHighContrastColors,
   'dark_tritanopia': darkTritanopiaColors,
   'dark_dimmed': darkDimmedColors,
-};
+} as const;
 
-/**
- * @typedef {keyof typeof themes} ThemeKey
- */
+export type ThemeKey = keyof typeof themes;
 
 const scales = {
   'light': lightScale,
@@ -45,47 +43,38 @@ const scales = {
   'light_tritanopia': lightScale,
   'dark_tritanopia': darkScale,
   'dark_colorblind': darkScale,
-};
+} as const;
 
+interface ColorToken {
+  name: string;
+  type: "COLOR";
+  value: {
+    r: number;
+    g: number;
+    b: number;
+    a: number;
+  };
+}
+
+interface FloatToken {
+  name: string;
+  type: "FLOAT";
+  value: number;
+}
+
+type Token = ColorToken | FloatToken;
 
 /**
  * Convert an rgba color to a hex color.
- * @param {number} r
- * @param {number} g
- * @param {number} b
- * @param {number} a
  */
-function rgbaToHexA(r, g, b, a) {
+function rgbaToHexA(r: number, g: number, b: number, a: number): string {
   return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}${Math.round(a * 255).toString(16).padStart(2, '0')}`;
 }
 
 /**
- * @typedef ColorToken
- * @property {string} name
- * @property {"COLOR"} type
- * @property {object} value
- * @property {number} value.r
- * @property {number} value.g
- * @property {number} value.b
- * @property {number} value.a
- */
-
-/**
- * @typedef FloatToken
- * @property {string} name
- * @property {"FLOAT"} type
- * @property {number} value
- */
-
-/**
- * @typedef {ColorToken | FloatToken} Token
- */
-
-/**
  * Remap the theme to a format that is easier to use in the code.
- * @param {Token[]} theme
  */
-function remapTheme(theme) {
+function remapTheme(theme: Token[]): Record<string, string> {
   // imported themes are in the format with { type: 'json' }
   // [
   //   { name: "some/token", value: { r: 1, g: 1 b: 1 a: 1 } }
@@ -104,14 +93,10 @@ function remapTheme(theme) {
       acc[name] = color;
       return acc;
     },
-    /** @type Record<string, string> */({})
+    {} as Record<string, string>
   );
 }
 
-/**
- * @param {ThemeKey} theme
- */
-export function getColorTokens(theme) {
+export function getColorTokens(theme: ThemeKey): Record<string, string> {
   return { ...remapTheme(scales[theme]), ...remapTheme(themes[theme]) };
 }
-

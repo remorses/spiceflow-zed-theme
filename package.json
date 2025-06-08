@@ -4,12 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/generate",
-    "build": "node src/generate"
+    "dev": "tsx --watch src/generate.ts",
+    "build": "tsx src/generate.ts"
   },
   "devDependencies": {
     "@primer/primitives": "^9.1.1",
     "@types/node": "^20.14.6",
+    "tsx": "^4.19.4",
     "typescript": "^5.4.5"
   }
 }
