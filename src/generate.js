@@ -7,6 +7,7 @@ const writeData = {
   author: "Pyae Sone Aung",
   themes: [
     getTheme({ themeKey: "dark", name: "My Github Dark", type: "dark" }),
+    getTheme({ themeKey: "light", name: "Github Light", type: "light" }),
     getTheme({
       themeKey: "dark_dimmed",
       name: "My Github Dark Dimmed",
