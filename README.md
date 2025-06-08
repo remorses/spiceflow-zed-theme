@@ -6,11 +6,11 @@ Git deletions have been colored purple so you can distinguish errors from deleti
 
 ### Dark
 
-![Dark Theme](./art/dark.png)
+![Dark Theme](./screenshots/dark.png)
 
 ### Light
 
-![Light Theme](./art/light.png)
+![Light Theme](./screenshots/light.png)
 
 ## Installation
 
