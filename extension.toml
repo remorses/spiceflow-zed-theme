@@ -1,7 +1,7 @@
-id = "my-github-theme"
-name = "Github Theme"
+id = "spiceflow-theme"
+name = "Spiceflow Theme"
 version = "0.1.3"
 schema_version = 1
 authors = ["Pyae Sone Aung <pyaesoneaungrgn@gmail.com>", "Clay Tercek"]
-description = "GitHub themes for Zed"
-repository = "https://github.com/PyaeSoneAungRgn/github-zed-theme"
+description = "Spiceflow themes for Zed"
+repository = "https://github.com/PyaeSoneAungRgn/spiceflow-zed-theme"

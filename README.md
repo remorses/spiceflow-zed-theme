@@ -1,4 +1,4 @@
-# GitHub Zed Themes
+# Spiceflow Zed Themes
 
 Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vscode-theme). Generated from [Primer's Primitives](https://primer.style/primitives/).
 
@@ -26,13 +26,13 @@ Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vs
 
 1. Open `Command Palette`
 2. Select `zed: extensions`
-3. Search `GitHub Theme`
+3. Search `Spiceflow Theme`
 
 ## Activate Theme
 
 1. Open `Command Palette`
 2. Select `theme selector: toggle`
-3. Search `GitHub Light` or `GitHub Dark`
+3. Search `Spiceflow Light` or `Spiceflow Dark`
 
 ## Contributing
 
