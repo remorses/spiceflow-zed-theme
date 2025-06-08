@@ -43,3 +43,5 @@ npm run dev
 2. Run `npm run build`
 3. Commit and push your changes (make sure to push the built files in `themes/` as well)
 4. Follow the [Zed publishing docs](https://zed.dev/docs/extensions/developing-extensions#updating-an-extension) to publish the extension
+
+.

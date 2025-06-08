@@ -1,7 +1,11 @@
 id = "spiceflow-theme"
 name = "Spiceflow Theme"
-version = "0.1.3"
+version = "0.0.0"
 schema_version = 1
-authors = ["Pyae Sone Aung <pyaesoneaungrgn@gmail.com>", "Clay Tercek"]
+authors = [
+    "Tommy D. Rossi <tommy@notaku.so>",
+    "Pyae Sone Aung <pyaesoneaungrgn@gmail.com>",
+    "Clay Tercek",
+]
 description = "Spiceflow themes for Zed"
-repository = "https://github.com/PyaeSoneAungRgn/spiceflow-zed-theme"
+repository = "https://github.com/remorses/spiceflow-zed-theme"
