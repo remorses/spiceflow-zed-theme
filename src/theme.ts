@@ -54,21 +54,24 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
 
     return [h * 360, s * 100, l * 100];
   };
-
   /**
    * Convert HSL to hex color
    */
-  const hslToHex = (h: number, s: number, l: number): string => {
-    l /= 100;
-    const a = s * Math.min(l, 1 - l) / 100;
-    const f = (n: number) => {
-      const k = (n + h / 30) % 12;
-      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-      return Math.round(255 * color).toString(16).padStart(2, '0');
-    };
-    return `#${f(0)}${f(8)}${f(4)}`;
-  };
+   const hslToHex = (h: number, s: number, l: number): string => {
+     // Cap max values
+     h = Math.min(h, 360);
+     s = Math.min(s, 100);
+     l = Math.min(l, 100);
 
+     l /= 100;
+     const a = s * Math.min(l, 1 - l) / 100;
+     const f = (n: number) => {
+       const k = (n + h / 30) % 12;
+       const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+       return Math.round(255 * color).toString(16).padStart(2, '0');
+     };
+     return `#${f(0)}${f(8)}${f(4)}`;
+   };
   /**
    * Convert red hue to purple hue while preserving brightness and saturation
    */
@@ -80,17 +83,19 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
     const alpha = hasAlpha ? hexColor.slice(7) : '';
     const baseColor = hasAlpha ? hexColor.slice(0, 7) : hexColor;
 
-    const [h, s, l] = hexToHsl(baseColor);
+    let [h, s, l] = hexToHsl(baseColor);
 
     // Convert red hue (~0°) to purple hue (~280°)
     // Red range is roughly 340-20 degrees, purple is around 280
-    let newHue = h;
+
     if (h <= 20 || h >= 340) {
       // This is in the red range, convert to purple
-      newHue = 280;
+      h = 310;
+      l += 20
+      s += 40
     }
 
-    return hslToHex(newHue, s, l) + alpha;
+    return hslToHex(h, s, l) + alpha;
   };
 
   /**
