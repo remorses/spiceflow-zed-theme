@@ -20,6 +20,80 @@ export function getTheme({ themeKey, name, type }) {
 
 
   /**
+   * Convert hex color to HSL
+   * @param {string} hex - hex color (with or without #)
+   * @returns {[number, number, number]} - [h, s, l] where h is 0-360, s and l are 0-100
+   */
+  const hexToHsl = (hex) => {
+    const r = parseInt(hex.slice(1, 3), 16) / 255;
+    const g = parseInt(hex.slice(3, 5), 16) / 255;
+    const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h, s, l = (max + min) / 2;
+
+    if (max === min) {
+      h = s = 0; // achromatic
+    } else {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return [h * 360, s * 100, l * 100];
+  };
+
+  /**
+   * Convert HSL to hex color
+   * @param {number} h - hue (0-360)
+   * @param {number} s - saturation (0-100)
+   * @param {number} l - lightness (0-100)
+   * @returns {string} - hex color
+   */
+  const hslToHex = (h, s, l) => {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+  };
+
+  /**
+   * Convert red hue to purple hue while preserving brightness and saturation
+   * @param {string} hexColor - hex color to convert
+   * @returns {string} - converted hex color
+   */
+  const redToPurple = (hexColor) => {
+    if (!hexColor || !hexColor.startsWith('#')) return hexColor;
+    
+    // Extract alpha if present
+    const hasAlpha = hexColor.length === 9;
+    const alpha = hasAlpha ? hexColor.slice(7) : '';
+    const baseColor = hasAlpha ? hexColor.slice(0, 7) : hexColor;
+    
+    const [h, s, l] = hexToHsl(baseColor);
+    
+    // Convert red hue (~0°) to purple hue (~280°)
+    // Red range is roughly 340-20 degrees, purple is around 280
+    let newHue = h;
+    if (h <= 20 || h >= 340) {
+      // This is in the red range, convert to purple
+      newHue = 280;
+    }
+    
+    return hslToHex(newHue, s, l) + alpha;
+  };
+
+  /**
    * @param {string} tokenName
    * @param {number} alphaValue
    */
@@ -77,7 +151,6 @@ export function getTheme({ themeKey, name, type }) {
     }
     return tokens[tokenName];
   }
-
   return {
     appearance: type,
     name,
@@ -99,9 +172,9 @@ export function getTheme({ themeKey, name, type }) {
       "created.background": tokens['bgColor/success-muted'],
       "created.border": tokens['borderColor/success-muted'],
 
-      "deleted": tokens['fgColor/danger'],
-      "deleted.background": tokens['bgColor/danger-muted'],
-      "deleted.border": tokens['borderColor/danger-muted'],
+      "deleted": redToPurple(tokens['fgColor/danger']),
+      "deleted.background": redToPurple(tokens['bgColor/danger-muted']),
+      "deleted.border": redToPurple(tokens['borderColor/danger-muted']),
 
       "drop_target.background": tokens['bgColor/accent-muted'],
 
