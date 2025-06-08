@@ -55,11 +55,34 @@ export function getTheme({ themeKey, name, type }) {
     return '#' + color;
   }
 
+  // Custom gray palette similar to VS Code theme
+  const customGrays = {
+    // Main backgrounds
+    'bgColor/default': '#1E1E1E',
+    'bgColor/muted': '#292929',
+    'bgColor/inset': '#252526',
+    'bgColor/disabled': '#383B3D',
+    'overlay/bgColor': '#2D2D30',
+    // Neutral muted for elements
+    'bgColor/neutral-muted': '#3A3D41',
+  };
+
+  /**
+   * Get color with custom gray overrides for dark themes
+   * @param {string} tokenName
+   */
+  const getColor = (tokenName) => {
+    if (!themeKey.startsWith('light') && customGrays[tokenName]) {
+      return customGrays[tokenName] + 'ff'; // Add full opacity
+    }
+    return tokens[tokenName];
+  }
+
   return {
     appearance: type,
     name,
     style: {
-      "background": tokens['bgColor/default'],
+      "background": getColor('bgColor/default'),
       "border": tokens['borderColor/default'],
 
       "border.disabled": tokens['borderColor/disabled'],
@@ -82,37 +105,37 @@ export function getTheme({ themeKey, name, type }) {
 
       "drop_target.background": tokens['bgColor/accent-muted'],
 
-      "editor.active_line.background": tokens['bgColor/muted'],
+      "editor.active_line.background": getColor('bgColor/muted'),
       "editor.active_line_number": tokens['fgColor/default'],
       "editor.active_wrap_guide": tokens['borderColor/muted'],
-      "editor.background": tokens['bgColor/default'],
+      "editor.background": getColor('bgColor/default'),
       "editor.document_highlight.read_background": alpha("fgColor/accent", 0.3),
       "editor.document_highlight.write_background": alpha("fgColor/accent", 0.2),
       "editor.foreground": tokens['fgColor/default'],
-      "editor.gutter.background": tokens['bgColor/default'],
-      "editor.highlighted_line.background": tokens['bgColor/neutral-muted'],
+      "editor.gutter.background": getColor('bgColor/default'),
+      "editor.highlighted_line.background": getColor('bgColor/neutral-muted'),
       "editor.invisible": tokens['fgColor/disabled'],
       "editor.line_number": tokens['fgColor/muted'],
-      "editor.subheader.background": tokens['bgColor/muted'],
+      "editor.subheader.background": getColor('bgColor/muted'),
       "editor.wrap_guide": tokens['borderColor/muted'],
 
-      "element.active": tokens['bgColor/neutral-muted'],
-      "element.background": tokens['bgColor/neutral-muted'],
-      "element.disabled": tokens['bgColor/disabled'],
-      "element.hover": tokens['bgColor/neutral-muted'],
-      "element.selected": tokens['bgColor/neutral-muted'],
+      "element.active": getColor('bgColor/neutral-muted'),
+      "element.background": getColor('bgColor/neutral-muted'),
+      "element.disabled": getColor('bgColor/disabled'),
+      "element.hover": getColor('bgColor/neutral-muted'),
+      "element.selected": getColor('bgColor/neutral-muted'),
 
-      "elevated_surface.background": tokens['overlay/bgColor'],
+      "elevated_surface.background": getColor('overlay/bgColor'),
 
       "error": tokens['fgColor/danger'],
       "error.background": tokens['bgColor/muted'],
       "error.border": tokens['borderColor/muted'],
 
-      "ghost_element.active": tokens['bgColor/neutral-muted'],
+      "ghost_element.active": getColor('bgColor/neutral-muted'),
       "ghost_element.background": tokens['bgColor/transparent'],
-      "ghost_element.disabled": tokens['bgColor/disabled'],
-      "ghost_element.hover": tokens['bgColor/neutral-muted'],
-      "ghost_element.selected": tokens['bgColor/neutral-muted'],
+      "ghost_element.disabled": getColor('bgColor/disabled'),
+      "ghost_element.hover": getColor('bgColor/neutral-muted'),
+      "ghost_element.selected": getColor('bgColor/neutral-muted'),
 
       "hidden": tokens['fgColor/disabled'],
       "hidden.background": tokens['bgColor/disabled'],
@@ -145,11 +168,11 @@ export function getTheme({ themeKey, name, type }) {
       "modified.border": tokens['borderColor/attention-muted'],
 
       "pane.focused_border": tokens['borderColor/default'],
-      "panel.background": tokens['bgColor/inset'],
+      "panel.background": getColor('bgColor/inset'),
       "panel.focused_border": tokens['borderColor/default'],
 
       "predictive": tokens['fgColor/muted'],
-      "predictive.background": tokens['bgColor/neutral-muted'],
+      "predictive.background": getColor('bgColor/neutral-muted'),
       "predictive.border": tokens['borderColor/neutral-muted'],
 
       "renamed": tokens['fgColor/success'],
@@ -164,17 +187,17 @@ export function getTheme({ themeKey, name, type }) {
 
       "search.match_background": alpha("base/color/yellow/1", 0.3),
 
-      "status_bar.background": tokens['bgColor/inset'],
+      "status_bar.background": getColor('bgColor/inset'),
 
       "success": tokens['fgColor/success'],
       "success.background": tokens['bgColor/success-muted'],
       "success.border": tokens['borderColor/success-muted'],
 
-      "surface.background": tokens['bgColor/inset'],
+      "surface.background": getColor('bgColor/inset'),
 
-      "tab.active_background": tokens['bgColor/default'],
-      "tab.inactive_background": tokens['bgColor/inset'],
-      "tab_bar.background": tokens['bgColor/inset'],
+      "tab.active_background": getColor('bgColor/default'),
+      "tab.inactive_background": getColor('bgColor/inset'),
+      "tab_bar.background": getColor('bgColor/inset'),
 
       "terminal.ansi.black": tokens['color/ansi/black'],
       "terminal.ansi.bright_black": tokens['color/ansi/black-bright'],
@@ -201,7 +224,7 @@ export function getTheme({ themeKey, name, type }) {
       "terminal.ansi.bright_yellow": tokens['color/ansi/yellow-bright'],
       "terminal.ansi.dim_yellow": tokens['color/ansi/yellow'],
 
-      "terminal.background": tokens['bgColor/inset'],
+      "terminal.background": getColor('bgColor/inset'),
       "terminal.bright_foreground": tokens['fgColor/onEmphasis'],
       "terminal.dim_foreground": tokens['fgColor/muted'],
       "terminal.foreground": tokens['fgColor/default'],
@@ -212,8 +235,8 @@ export function getTheme({ themeKey, name, type }) {
       "text.muted": tokens['fgColor/default'],
       "text.placeholder": tokens['fgColor/muted'],
 
-      "title_bar.background": tokens['bgColor/inset'],
-      "toolbar.background": tokens['bgColor/default'],
+      "title_bar.background": getColor('bgColor/inset'),
+      "toolbar.background": getColor('bgColor/default'),
 
       "unreachable": tokens['fgColor/disabled'],
       "unreachable.background": tokens['bgColor/disabled'],
