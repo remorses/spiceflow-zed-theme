@@ -4,17 +4,13 @@ Project inspired on [GitHub's VS Code theme](https://github.com/primer/github-vs
 
 Git deletions have been colored purple so you can distinguish errors from deletions in the scrollbar gutters.
 
-### Light
-
-![Light Theme](./art/light.png)
-
 ### Dark
 
 ![Dark Theme](./art/dark.png)
 
-### Dark Dimmed
+### Light
 
-![Dark Dimmed Theme](./art/dark_dimmed.png)
+![Light Theme](./art/light.png)
 
 ## Installation
 
