@@ -34,3 +34,7 @@ Feel free to fork, make changes, and submit a pull request.
 npm install
 npm run dev
 ```
+
+## Real world usage
+
+I use this theme daily to develop projects like [Notaku](https://notaku.so), [Gesserit](https://gesserit.co), [Unframer](https://unframer.co) and [Akarso](https://akarso.co).
