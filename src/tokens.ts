@@ -36,9 +36,7 @@ const scales = {
   'dark_high_contrast': darkHighContrastScale,
   'dark_dimmed': darkDimmedScale,
 
-  // TODO: figure out what to do for these...
-  // At the moment, primer doesn't have colorblind or tritanopia scales, 
-  // only functional color tokens (generated in the themes above)
+
   'light_colorblind': lightScale,
   'light_tritanopia': lightScale,
   'dark_tritanopia': darkScale,
@@ -98,5 +96,5 @@ function remapTheme(theme: Token[]): Record<string, string> {
 }
 
 export function getColorTokens(theme: ThemeKey): Record<string, string> {
-  return { ...remapTheme(scales[theme]), ...remapTheme(themes[theme]) };
+  return { ...remapTheme(scales[theme] as Token[]), ...remapTheme(themes[theme] as Token[]) };
 }

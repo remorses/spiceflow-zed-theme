@@ -1,4 +1,7 @@
 import { getColorTokens, type ThemeKey } from "./tokens.js";
+import oneDark from './one_dark.json'
+import oneLight from './one_light.json'
+
 
 interface ThemeParams {
   themeKey: ThemeKey;
@@ -90,14 +93,12 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
 
     if (h <= 20 || h >= 340) {
       // This is in the red range, convert to purple
-      h = 310;
-      l += 20
+      h = 260;
+      l += 30
       s += 40
     }
-
     return hslToHex(h, s, l) + alpha;
   };
-
   /**
    * Add alpha transparency to a color token
    */
@@ -176,9 +177,9 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "created.background": tokens['bgColor/success-muted'] || '',
       "created.border": tokens['borderColor/success-muted'] || '',
 
-      "deleted": redToPurple(tokens['fgColor/danger'] || ''),
-      "deleted.background": redToPurple(tokens['bgColor/danger-muted'] || ''),
-      "deleted.border": redToPurple(tokens['borderColor/danger-muted'] || ''),
+      "deleted": (tokens['fgColor/done/default'] || ''),
+      "deleted.background": (tokens['bgColor/done-muted'] || ''),
+      "deleted.border": (tokens['borderColor/done-muted'] || ''),
 
       "drop_target.background": tokens['bgColor/accent-muted'] || '',
 
@@ -234,7 +235,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "ignored.background": tokens['bgColor/disabled'] || '',
       "ignored.border": tokens['borderColor/disabled'] || '',
 
-      "info": tokens['fgColor/attention'] || '',
+      "info": tokens['fgColor/muted'] || '',
       "info.background": tokens['bgColor/muted'] || '',
       "info.border": tokens['borderColor/muted'] || '',
 
@@ -260,7 +261,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "scrollbar.thumb.hover_background": tokens['bgColor/muted'] || '',
       "scrollbar.track.background": tokens['bgColor/transparent'] || '',
       "scrollbar.track.border": tokens['borderColor/transparent'] || '',
-      "scrollbar_thumb.background": tokens['bgColor/neutral-muted'] || '',
+      "scrollbar.thumb.background": tokens['bgColor/neutral-muted'] || '',
 
       "search.match_background": alpha("base/color/yellow/1", 0.3) || '',
 
@@ -285,9 +286,9 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "terminal.ansi.cyan": tokens['color/ansi/cyan'] || '',
       "terminal.ansi.bright_cyan": tokens['color/ansi/cyan-bright'] || '',
       "terminal.ansi.dim_cyan": tokens['color/ansi/cyan'] || '',
-      "terminal.ansi.green": tokens['color/ansi/green'] || '',
-      "terminal.ansi.bright_green": tokens['color/ansi/green-bright'] || '',
-      "terminal.ansi.dim_green": tokens['color/ansi/green'] || '',
+      "terminal.ansi.green": type === 'dark' ? oneDark.style['terminal.ansi.green'] : oneLight.style['terminal.ansi.green'],
+      "terminal.ansi.bright_green": type === 'dark' ? oneDark.style['terminal.ansi.bright_green'] : oneLight.style['terminal.ansi.bright_green'],
+      "terminal.ansi.dim_green": type === 'dark' ? oneDark.style['terminal.ansi.dim_green'] : oneLight.style['terminal.ansi.dim_green'],
       "terminal.ansi.magenta": tokens['color/ansi/magenta'] || '',
       "terminal.ansi.bright_magenta": tokens['color/ansi/magenta-bright'] || '',
       "terminal.ansi.dim_magenta": tokens['color/ansi/magenta'] || '',
@@ -319,7 +320,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "unreachable.background": tokens['bgColor/disabled'] || '',
       "unreachable.border": tokens['borderColor/disabled'] || '',
 
-      "warning": tokens['fgColor/attention'] || '',
+      "warning": tokens['fgColor/danger'] || '',
       "warning.background": tokens['bgColor/muted'] || '',
       "warning.border": tokens['borderColor/muted'] || '',
 
@@ -332,12 +333,14 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
         "yellow",
         "teal",
         "red"
-      ].map(color => ({
-        "cursor": tokens[`data/${color}/color/emphasis`] || '',
-        "background": tokens[`data/${color}/color/emphasis`] || '',
-        "selection": alpha(`data/${color}/color/emphasis`, 0.4) || ''
-      })),
+        ].map((color) => {
 
+          return {
+            cursor: tokens[`data/${color}/color/emphasis`] || "",
+            background: tokens[`data/${color}/color/emphasis`] || "",
+            selection: alpha(`data/${color}/color/emphasis`, 0.4) || "",
+          };
+      }),
       "syntax": {
         "attribute": {
           "color": null,
