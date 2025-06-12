@@ -177,7 +177,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "created.background": tokens['bgColor/success-muted'] || '',
       "created.border": tokens['borderColor/success-muted'] || '',
 
-      "deleted": (tokens['fgColor/done/default'] || ''),
+      "deleted": (tokens['fgColor/done'] || ''),
       "deleted.background": (tokens['bgColor/done-muted'] || ''),
       "deleted.border": (tokens['borderColor/done-muted'] || ''),
 
