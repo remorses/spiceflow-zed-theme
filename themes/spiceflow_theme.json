@@ -135,7 +135,7 @@
         "unreachable": "#818b98ff",
         "unreachable.background": "#eff2f5ff",
         "unreachable.border": "#818b981a",
-        "warning": "#bc4c00ff",
+        "warning": "#9a6700cc",
         "warning.background": "#f6f8faff",
         "warning.border": "#d1d9e0b3",
         "players": [
@@ -521,7 +521,7 @@
         "unreachable": "#656c7699",
         "unreachable.background": "#212830ff",
         "unreachable.border": "#656c761a",
-        "warning": "#db6d28ff",
+        "warning": "#d29922cc",
         "warning.background": "#151b23ff",
         "warning.border": "#3d444db3",
         "players": [

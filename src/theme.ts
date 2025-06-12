@@ -103,7 +103,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
    * Add alpha transparency to a color token
    */
   const alpha = (tokenName: string, alphaValue: number): string | null => {
-    const baseToken = tokens[tokenName];
+    const baseToken = tokens[tokenName] || tokenName;
     if (!baseToken) {
       console.warn(`Token '${tokenName}' not found in theme '${themeKey}'`);
       return null;
@@ -320,7 +320,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "unreachable.background": tokens['bgColor/disabled'] || '',
       "unreachable.border": tokens['borderColor/disabled'] || '',
 
-      "warning": tokens['fgColor/severe'] || '',
+      "warning": alpha(tokens['fgColor/attention'], 0.8) || '',
       "warning.background": tokens['bgColor/muted'] || '',
       "warning.border": tokens['borderColor/muted'] || '',
 
