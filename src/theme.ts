@@ -320,7 +320,7 @@ export function getTheme({ themeKey, name, type }: ThemeParams): ThemeStyle {
       "unreachable.background": tokens['bgColor/disabled'] || '',
       "unreachable.border": tokens['borderColor/disabled'] || '',
 
-      "warning": tokens['fgColor/danger'] || '',
+      "warning": tokens['fgColor/severe'] || '',
       "warning.background": tokens['bgColor/muted'] || '',
       "warning.border": tokens['borderColor/muted'] || '',
 
